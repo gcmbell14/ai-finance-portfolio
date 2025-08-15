@@ -1,3 +1,7 @@
+⭐ Featured Hero Project
+**AI-Powered Financial Compliance & Risk Insights**  
+Real-time fraud alerts, loan risk scoring, and compliance summaries in one pane of glass.  
+
 # 💼 AI in Finance Portfolio  
 
 This portfolio showcases **practical AI applications** in the **banking and financial services industry**, designed to demonstrate skills in:  

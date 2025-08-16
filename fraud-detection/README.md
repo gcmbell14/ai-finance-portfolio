@@ -4,12 +4,12 @@
 
 **Business impact**
 - Cut alert noise while keeping catch rate (Top-K aligned to analyst capacity)
-- Clear **reason codes** (“amount 9× baseline”, “3,200km hop”, “device change”) speed decisions
+- Clear reason codes (“amount 9× baseline”, “3,200km hop”, “device change”) speed decisions
 - Live triage table + CSV export for ops handoff
 
 **Results (demo)**
-- Precision@100: ~25–35% on backtests  
-- Median inference: <1s  
+- Precision@100: ~25–35% on backtests
+- Median inference: <1s
 - Daily alert budget: K = 100 (configurable)
 
 **See it live:** Fraud tab in the hero app → https://github.com/gcmbell14/ai-compliance-risk-insights  
@@ -34,7 +34,7 @@
 
 ## Tech stack
 - Python (pandas, scikit-learn), SQL; Streamlit or Power BI  
-- Optional Azure pieces: Azure ML, Azure AI Anomaly Detector, Azure Functions (API), Azure SQL/Blob, Key Vault, App Insights
+- Optional Azure: Azure ML, Azure AI Anomaly Detector, Azure Functions (API), Azure SQL/Blob, Key Vault, App Insights
 
 ## Governance & Auditability
 - Redact PAN/PII; tokenized IDs in logs/SHAP  

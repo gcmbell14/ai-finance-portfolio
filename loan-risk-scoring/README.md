@@ -1,30 +1,53 @@
-# AI-Enhanced Loan Risk Scoring
+# 📊 AI-Enhanced Loan Risk Scoring (30-sec overview)
 
-## Business Problem
-Traditional credit scores often miss good borrowers or approve risky ones because they ignore alternative payment behavior.
+**What it is:** Credit risk scoring with **transparent drivers** and a **threshold slider** to tune risk appetite for approvals, pricing, and collections.
 
-## Solution
-Deploy **Azure Machine Learning classification model** that combines credit bureau data with alternative data (utility bills, rent payments, income stability).
+**Business impact**
+- Faster underwriting decisions with explainability
+- Adjustable **risk threshold** to manage coverage vs precision
+- CSV export of **high-risk** applicants for downstream workflows
+
+**Results (demo)**
+- ROC-AUC: ~0.85–0.90 (baseline logistic)
+- KS: ~0.35–0.45
+- High-risk coverage (≥ threshold 60): ~20–30%
+
+**See it live:** Loans tab in the hero app → https://github.com/gcmbell14/ai-compliance-risk-insights  
+**Screenshot:**  
+![Loan Risk Dashboard](../visuals/loan-risk-dashboard.png)
+
+<details>
+  <summary><strong>Details (features, modeling, governance, tests)</strong></summary>
+
+## Features (MVP)
+- `credit_score`, `debt_to_income`, `utilization`, `delinquencies`, `income`, `loan_amount`  
+*Optional: alt-data if available (tenure, balance trends, bureau events).*
+
+## Modeling
+- **Baseline:** Logistic Regression with class weighting  
+- **Improved:** Gradient boosting (e.g., LightGBM) + calibration  
+- Track **ROC-AUC**, **KS**, and **precision/recall at threshold**
 
 ## Dataset
-Synthetic or anonymized banking loan application dataset.
+- Public lending datasets or synthetic portfolio samples  
+- Train/test split; prefer temporal validation where possible
 
-## Technical Stack
-- **Languages:** Python (Pandas, Scikit-learn), SQL
-- **AI Platform:** Azure Machine Learning
-- **Integration:** APIs to pull data from credit bureaus
-- **Visualization:** Power BI risk dashboard
+## App UX
+- **Threshold slider** (e.g., ≥60 = “high risk”)  
+- **Feature influence** chart (coeffs/SHAP)  
+- **Download High-Risk Loans CSV**
 
-## Process
-1. Combine structured and alternative credit data.
-2. Clean and preprocess data with Python.
-3. Train classification model for risk prediction.
-4. Deploy scoring API integrated into loan origination systems.
+## Governance & Auditability
+- Version models and thresholds; document score cutoffs  
+- Store explanation artifacts for adverse action notices where applicable
 
-## Results
-- Expanded approvals for underserved but creditworthy customers.
-- Reduced manual underwriting time by 50%.
-- Improved portfolio performance.
+## Test scenarios (UAT)
+- Low score + high DTI → flagged as high risk  
+- Mid score + clean history → lower risk  
+- High utilization spike → risk increases, explanation reflects utilization
 
-## Screenshots
-![Loan Risk Dashboard](../visuals/loan-risk-dashboard.png)
+## Next steps
+- Add calibration plots; handle edge cases (missing values, outliers)  
+- Segment models (prime vs near-prime); introduce challenger/Champion
+
+</details>
